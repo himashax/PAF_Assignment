@@ -24,7 +24,7 @@ $(document).on("click", ".btnUpdate", function(event)
 		 $("#firstName").val($(this).closest("tr").find('td:eq(1)').text()); 
 		 $("#lastName").val($(this).closest("tr").find('td:eq(2)').text()); 
 		 $("#email").val($(this).closest("tr").find('td:eq(3)').text());
-		 $("#dept").val($(this).closest("tr").find('td:eq(3)').text());
+		 $("#dept").val($(this).closest("tr").find('td:eq(4)').text());
 		});
 
 $(document).on("click", ".btnRemove", function(event)
