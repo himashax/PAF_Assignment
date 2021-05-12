@@ -21,7 +21,7 @@
 		last name<input type="text" name="lastName"/>
 		email<input type="text" name="email" />
 		department<input type="text" name="dept" />
-		 <input id="btnSave" name="btnSave" type="button" value="Save" 
+		<input id="btnSave" name="btnSave" type="button" value="Save" 
  	class="btn btn-primary">
  	<input type="hidden" id="hidItemIDSave" name="hidItemIDSave" value="">
 	</form>

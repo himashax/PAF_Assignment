@@ -17,6 +17,15 @@ $(document).on("click", "#btnSave", function(event){
 	 }); 
 });
 
+$(document).on("click", ".btnUpdate", function(event)
+		{ 
+		$("#hidItemIDSave").val($(this).data("resid")); 
+		 $("#resID").val($(this).closest("tr").find('td:eq(0)').text()); 
+		 $("#firstName").val($(this).closest("tr").find('td:eq(1)').text()); 
+		 $("#lastName").val($(this).closest("tr").find('td:eq(2)').text()); 
+		 $("#email").val($(this).closest("tr").find('td:eq(3)').text());
+		 $("#dept").val($(this).closest("tr").find('td:eq(3)').text());
+		});
 
 $(document).on("click", ".btnRemove", function(event)
 	{ 
@@ -24,7 +33,7 @@ $(document).on("click", ".btnRemove", function(event)
 		 { 
 		 url : "ResearcherAPI", 
 		 type : "DELETE", 
-		 data : "id=" + $(this).data("itemid"),
+		 data : "id=" + $(this).data("resid"),
 		 dataType : "text", 
 		 complete : function(response, status) 
 		 { 
