@@ -1,10 +1,19 @@
+$(document).ready(function()
+{ 
+if ($("#alertSuccess").text().trim() == "") 
+ { 
+ $("#alertSuccess").hide(); 
+ } 
+ $("#alertError").hide(); 
+});
+
 
 $(document).on("click", "#btnSave", function(event){ 
-
-//var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT"; 
-
-	var type = "POST";
 	
+	
+	
+	var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT"; 
+
 	$.ajax( 
 	 { 
 	 url : "ResearcherAPI", 
@@ -19,7 +28,7 @@ $(document).on("click", "#btnSave", function(event){
 
 $(document).on("click", ".btnUpdate", function(event)
 		{ 
-		$("#hidItemIDSave").val($(this).data("resid")); 
+		 $("#hidItemIDSave").val($(this).data("resid")); 
 		 $("#resID").val($(this).closest("tr").find('td:eq(0)').text()); 
 		 $("#firstName").val($(this).closest("tr").find('td:eq(1)').text()); 
 		 $("#lastName").val($(this).closest("tr").find('td:eq(2)').text()); 
@@ -56,7 +65,6 @@ $(document).on("click", ".btnRemove", function(event)
 	 $("#hidItemIDSave").val(""); 
 	 $("#formItem")[0].reset(); 
 	}
-
 	
 	
 	function onItemDeleteComplete(response, status)

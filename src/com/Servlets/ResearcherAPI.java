@@ -56,6 +56,29 @@ public class ResearcherAPI extends HttpServlet {
 		
 		response.getWriter().write(result);
 	}
+	
+	
+	private static Map getParasMap(HttpServletRequest request) { 
+		 Map<String, String> map = new HashMap<String, String>(); 
+		 try
+			 { 
+				 Scanner scanner = new Scanner(request.getInputStream(), "UTF-8"); 
+				 String queryString = scanner.hasNext() ? 
+				 scanner.useDelimiter("\\A").next() : ""; 
+				 scanner.close(); 
+				 String[] params = queryString.split("&"); 
+				 for (String param : params) 
+				 { 
+				String[] p = param.split("=");
+				 map.put(p[0], p[1]); 
+				 } 
+			 } 
+			catch (Exception e) {
+				e.printStackTrace();
+			 } 
+		return map; 
+	}
+	
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
@@ -65,18 +88,20 @@ public class ResearcherAPI extends HttpServlet {
 		resDaoObj = new ResearcherDAOImpl();
 		resObj = new Researcher();
 		
-		Map values = getParasMap(request); 
-		
-		//resObj.setId(Integer.parseInt(values.get("id").toString()));
-		resObj.setResearcherID(values.get("resID").toString());
-		resObj.setFirstName(values.get("firstName").toString());
-		resObj.setLastName(values.get("lastName").toString());
-		resObj.setEmail(values.get("email").toString());
-		resObj.setDepartment(values.get("dept").toString());
+		Map paras = getParasMap(request);		
+	
+		resObj.setId(Integer.parseInt(paras.get("hidItemIDSave").toString()));
+		resObj.setResearcherID(paras.get("resID").toString());
+		resObj.setFirstName(paras.get("firstName").toString());
+		resObj.setLastName(paras.get("lastName").toString());
+		resObj.setEmail(paras.get("email").toString());
+		resObj.setDepartment(paras.get("dept").toString());
 		
 		String result = resDaoObj.updateResearcher(resObj);
 		
 		response.getWriter().write(result); 
+		
+		System.out.println("update working");
 	}
 
 	/**
@@ -86,34 +111,13 @@ public class ResearcherAPI extends HttpServlet {
 
 		resDaoObj = new ResearcherDAOImpl();
 		
-		Map values = getParasMap(request); 
-		String result = resDaoObj.deleteResearcher(Integer.parseInt(values.get("id").toString())); 
-		response.getWriter().write(result); 
+		Map paras = getParasMap(request); 
+		String output = resDaoObj.deleteResearcher(Integer.parseInt(paras.get("id").toString())); 
+		response.getWriter().write(output); 
 		
 	}
 	
 	
-	private static Map getParasMap(HttpServletRequest request) 
-	{ 
-	 Map<String, String> map = new HashMap<String, String>(); 
-	try
-	 { 
-	 Scanner scanner = new Scanner(request.getInputStream(), "UTF-8"); 
-	 String queryString = scanner.hasNext() ? 
-	 scanner.useDelimiter("\\A").next() : ""; 
-	 scanner.close(); 
-	 String[] params = queryString.split("&"); 
-	 for (String param : params) 
-	 { 
-	String[] p = param.split("=");
-	 map.put(p[0], p[1]); 
-	 } 
-	 } 
-	catch (Exception e) 
-	 { 
-	 } 
-	return map; 
-	}
 	
 
 }

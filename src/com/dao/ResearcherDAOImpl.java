@@ -71,7 +71,7 @@ public class ResearcherDAOImpl implements IResearcherDAO {
 			//Create ResultSet object to get database result set and execute SQL query
 			ResultSet rs = statement.executeQuery(retrieveQuery);
 			
-			result = "<table border='1'><tr><th>id</th>" 
+			result = "<table border='1'>" 
 					 + "<th>Researcher ID</th>"
 					 + "<th>First Name</th>" 
 					 + "<th>Last Name</th>" 
@@ -83,7 +83,7 @@ public class ResearcherDAOImpl implements IResearcherDAO {
 			//Go through all the rows in the result set
 			while(rs.next()) {
 				int id = rs.getInt(1);
-				result += "<tr><td>" + rs.getInt(1) + "</td>"; 
+				
 				result += "<td>" + rs.getString(2) + "</td>"; 
 				result += "<td>" + rs.getString(3) + "</td>"; 
 				result += "<td>" + rs.getString(4) + "</td>"; 
@@ -162,7 +162,7 @@ public class ResearcherDAOImpl implements IResearcherDAO {
 		//Connect to the database
 		Connection connection = dbConnection.getConnection();
 		
-		String output = "";
+		String result = "";
 		
 		//SQL query to update researcher details
 		String updateQuery = "update researcher set researcherID = '"+res.getResearcherID()+"', first_name = '"+res.getFirstName()+"' , last_name =  '"+res.getLastName()+"', email = '"+res.getEmail()+"', department = '"+res.getDepartment()+"' where id = '"+res.getId()+"' ";
@@ -173,20 +173,21 @@ public class ResearcherDAOImpl implements IResearcherDAO {
 			//Update researcher
 			preStatement.executeUpdate();
 			
-			output = "Updated Successfully";
-			
 			
 			//Disconnect from the database
 			connection.close();
+			String newResearchers = listResearchers(); 
+			result = "{\"status\":\"success\", \"data\": \"" + newResearchers + "\"}"; 
 			
 		} catch (SQLException|NullPointerException e) {
-			e.printStackTrace();
+			result = "{\"status\":\"error\", \"data\":  \"Error while inserting the item.\"}"; 
+			System.err.println(e.getMessage());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		//Returns success/unsuccess message
-		return output;
+		return result;
 	}
 	
 	
@@ -206,12 +207,16 @@ public class ResearcherDAOImpl implements IResearcherDAO {
 			
 			//Delete researcher
 			preStatement.execute();
-			result = "Record Deleted Successfully";
 			
 			//Disconnect from the database
 			connection.close();
+			
+			String newResearchers = listResearchers(); 
+			result = "{\"status\":\"success\", \"data\": \"" + newResearchers + "\"}"; 
+			
 		} catch (SQLException|NullPointerException e) {
-			e.printStackTrace();
+			result = "{\"status\":\"error\", \"data\":  \"Error while inserting the item.\"}"; 
+			System.err.println(e.getMessage());
 		}
 		
 		//Returns success/unsuccess message
@@ -219,30 +224,5 @@ public class ResearcherDAOImpl implements IResearcherDAO {
 	}
 	
 	
-	//Check if the researcher already exist
-	public boolean checkAvailability(String id) {
-		boolean researcherExist = false;
-		
-		Connection connection = dbConnection.getConnection();
-		
-		//Query for checking existence of data
-		String availabilityQuery = "select researcherID from researcher where researcherID = '"+id+"' ";
-		
-		try {
-			Statement st = connection.createStatement();
-			ResultSet rs = st.executeQuery(availabilityQuery);
-			
-			if(rs.next()) {
-				researcherExist = true;
-			}else {
-				researcherExist = false;
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return researcherExist;
-	}
 	
 }

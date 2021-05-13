@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Researcher</title>
 
 <link rel="stylesheet" href="Views/bootstrap.min.css">
 
@@ -13,26 +13,34 @@
 <script src="Components/researchers.js"></script>
 
 </head>
+
+<h1>Researcher Management</h1>
+
 <body>
+<div class="container">
 
 	<form id="formRes" name="formRes">
-		res id <input type="text" id="resID" name="resID"/>
-		first name<input type="text" id="firstName" name="firstName" />
-		last name<input type="text" id="lastName" name="lastName"/>
-		email<input type="text" id="email" name="email" />
-		department<input type="text" id="dept" name="dept" />
+		Researcher ID <input type="text" id="resID" name="resID"/>
+		First Name<input type="text" id="firstName" name="firstName" />
+		Last Name<input type="text" id="lastName" name="lastName"/>
+		Email<input type="text" id="email" name="email" />
+		Department<input type="text" id="dept" name="dept" />
 		<input id="btnSave" name="btnSave" type="button" value="Save" 
- 	class="btn btn-primary">
+ 	    class="btn btn-primary">
  	<input type="hidden" id="hidItemIDSave" name="hidItemIDSave" value="">
 	</form>
 
+	<br>
+	<div id="alertSuccess" class="alert alert-success"></div>
+	<div id="alertError" class="alert alert-danger"></div>
+
 	<div id="divItemsGrid">
- <%
- ResearcherDAOImpl resDaoObj = new ResearcherDAOImpl(); 
- out.print(resDaoObj.listResearchers()); 
- %>
+    <%
+          ResearcherDAOImpl resDaoObj = new ResearcherDAOImpl(); 
+          out.print(resDaoObj.listResearchers()); 
+    %>
 </div>
 	
-
+</div>
 </body>
 </html>
