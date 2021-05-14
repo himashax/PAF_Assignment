@@ -58,25 +58,26 @@ public class ResearcherAPI extends HttpServlet {
 	}
 	
 	
-	private static Map getParasMap(HttpServletRequest request) { 
-		 Map<String, String> map = new HashMap<String, String>(); 
-		 try
-			 { 
-				 Scanner scanner = new Scanner(request.getInputStream(), "UTF-8"); 
-				 String queryString = scanner.hasNext() ? 
-				 scanner.useDelimiter("\\A").next() : ""; 
-				 scanner.close(); 
-				 String[] params = queryString.split("&"); 
-				 for (String param : params) 
-				 { 
-				String[] p = param.split("=");
-				 map.put(p[0], p[1]); 
-				 } 
-			 } 
-			catch (Exception e) {
-				e.printStackTrace();
-			 } 
-		return map; 
+	private static Map getParasMap(HttpServletRequest request) 
+	{ 
+	 Map<String, String> map = new HashMap<String, String>(); 
+	try
+	 { 
+	 Scanner scanner = new Scanner(request.getInputStream(), "UTF-8"); 
+	 String queryString = scanner.hasNext() ? 
+	 scanner.useDelimiter("\\A").next() : ""; 
+	 scanner.close(); 
+	 String[] params = queryString.split("&"); 
+	 for (String param : params) 
+	 { 
+	String[] p = param.split("=");
+	 map.put(p[0], p[1]); 
+	 } 
+	 } 
+	catch (Exception e) 
+	 { 
+	 } 
+	return map; 
 	}
 	
 
@@ -98,6 +99,8 @@ public class ResearcherAPI extends HttpServlet {
 		resObj.setDepartment(paras.get("dept").toString());
 		
 		String result = resDaoObj.updateResearcher(resObj);
+		
+		System.out.println(paras.get("email").toString());
 		
 		response.getWriter().write(result); 
 		

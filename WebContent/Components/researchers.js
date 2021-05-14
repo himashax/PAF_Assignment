@@ -7,10 +7,50 @@ if ($("#alertSuccess").text().trim() == "")
  $("#alertError").hide(); 
 });
 
+function validateItemForm() 
+{ 
+
+if ($("#resID").val().trim() == "") 
+ { 
+ return "Insert Researcher ID."; 
+ } 
+
+if ($("#firstName").val().trim() == "") 
+ { 
+ return "Insert First Name."; 
+ } 
+
+if ($("#lastName").val().trim() == "") 
+ { 
+ return "Insert Last Name."; 
+ } 
+
+if($("#email").val().trim() == ""){
+	return "Insert Researcher Email.";
+}
+
+var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+if(!$("#email").val().match(mailformat)){
+	return "Incorrect Email Format"; 
+}
+
+
+if ($("#dept").val().trim() == "") 
+ { 
+ return "Insert Researcher's Department."; 
+ } 
+return true; 
+}	
 
 $(document).on("click", "#btnSave", function(event){ 
 	
-	
+	var status = validateItemForm(); 
+	if (status != true) 
+	 { 
+	 $("#alertError").text(status); 
+	 $("#alertError").show(); 
+	 return; 
+	 } 
 	
 	var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT"; 
 

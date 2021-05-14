@@ -71,13 +71,13 @@ public class ResearcherDAOImpl implements IResearcherDAO {
 			//Create ResultSet object to get database result set and execute SQL query
 			ResultSet rs = statement.executeQuery(retrieveQuery);
 			
-			result = "<table border='1'>" 
-					 + "<th>Researcher ID</th>"
+			result = "<table class='table table-hover'>" 
+					 + "<thead class='thead-light'><th>Researcher ID</th>"
 					 + "<th>First Name</th>" 
 					 + "<th>Last Name</th>" 
 					 + "<th>Email</th>"
 					 + "<th>Department</th>" 
-					 + "<th>Update</th><th>Delete</th></tr>"; 
+					 + "<th>Update</th><th>Delete</th></thead></tr>"; 
 			
 			
 			//Go through all the rows in the result set
@@ -91,9 +91,9 @@ public class ResearcherDAOImpl implements IResearcherDAO {
 				result += "<td>" + rs.getString(6) + "</td>"; 
 				 
 				result += "<td><input name='btnUpdate' type='button' value='Update' "
-						+ "class='btnUpdate btn btn-secondary' data-resid='" + id + "'></td>"
+						+ "class='btnUpdate btn-sm btn btn-secondary' data-resid='" + id + "'></td>"
 						+ "<td><input name='btnRemove' type='button' value='Remove' "
-						+ "class='btnRemove btn btn-danger' data-resid='" + id + "'></td></tr>"; 
+						+ "class='btnRemove btn btn-sm btn-danger' data-resid='" + id + "'></td></tr>"; 
 				 
 			}
 			

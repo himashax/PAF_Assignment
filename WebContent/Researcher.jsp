@@ -14,33 +14,61 @@
 
 </head>
 
-<h1>Researcher Management</h1>
-
 <body>
+
+
 <div class="container">
 
+<br>
+<h2>Researcher Management</h2>
+<br>
+
 	<form id="formRes" name="formRes">
-		Researcher ID <input type="text" id="resID" name="resID"/>
-		First Name<input type="text" id="firstName" name="firstName" />
-		Last Name<input type="text" id="lastName" name="lastName"/>
-		Email<input type="text" id="email" name="email" />
-		Department<input type="text" id="dept" name="dept" />
-		<input id="btnSave" name="btnSave" type="button" value="Save" 
- 	    class="btn btn-primary">
- 	<input type="hidden" id="hidItemIDSave" name="hidItemIDSave" value="">
+	<div class="form-group">
+	
+	<div class="form-row">
+		<div class="col-md-2">
+		Researcher ID <input type="text" id="resID" name="resID" class="form-control form-control-sm"/></div>
+		
+		<div class="col-md-2">
+		First Name<input type="text" id="firstName" name="firstName" class="form-control form-control-sm"/></div>
+		
+		<div class="col-md-2">
+		Last Name<input type="text" id="lastName" name="lastName" class="form-control form-control-sm"/></div>
+	
+		<div class="col-md-3">
+		Email<input type="text" id="email" name="email" class="form-control form-control-sm"/></div>
+		
+		<div class="col-md-2">
+		Department<input type="text" id="dept" name="dept" class="form-control form-control-sm" /></div>
+		
+		<div class="col-md-1">
+		<br>
+		<input id="btnSave" name="btnSave" type="button" value="Save" class="form-control btn btn-sm btn-primary"></div>
+ 		<input type="hidden" id="hidItemIDSave" name="hidItemIDSave" value="">
+ 	
+ 	</div>	
+ 	</div>
 	</form>
 
 	<br>
 	<div id="alertSuccess" class="alert alert-success"></div>
 	<div id="alertError" class="alert alert-danger"></div>
+	
 
-	<div id="divItemsGrid">
+	<br>
+
+	<div id="divItemsGrid" >
     <%
           ResearcherDAOImpl resDaoObj = new ResearcherDAOImpl(); 
           out.print(resDaoObj.listResearchers()); 
     %>
+	</div>
+
+
+
 </div>
 	
-</div>
+
 </body>
 </html>
